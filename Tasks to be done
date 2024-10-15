@@ -1,0 +1,65 @@
+tasks = []
+
+def add_task():
+    task_name = input("Enter task name: ")
+    deadline = input("Enter task deadline: ")
+    task = {
+        "name": task_name,
+        "deadline": deadline,
+        "status": "Pending"
+    }
+    tasks.append(task)
+    print(f"Task '{task_name}' added.\n")
+
+def view_tasks():
+    if len(tasks) == 0:
+        print("No tasks to show.\n")
+    else:
+        for i, task in enumerate(tasks, 1):
+            print(f"{i}. {task['name']} - {task['deadline']} - {task['status']}")
+        print()
+
+def complete_task():
+    view_tasks()
+    task_num = int(input("Enter the task number to mark as complete: ")) - 1
+    if 0 <= task_num < len(tasks):
+        tasks[task_num]['status'] = "Completed"
+        print(f"Task '{tasks[task_num]['name']}' marked as completed.\n")
+    else:
+        print("Invalid task number.\n")
+
+def delete_task():
+    view_tasks()
+    task_num = int(input("Enter the task number to delete: ")) - 1
+    if 0 <= task_num < len(tasks):
+        removed_task = tasks.pop(task_num)
+        print(f"Task '{removed_task['name']}' deleted.\n")
+    else:
+        print("Invalid task number.\n")
+
+def main():
+    while True:
+        print("Task Tracker Menu:")
+        print("1. Add task")
+        print("2. View tasks")
+        print("3. Complete task")
+        print("4. Delete task")
+        print("5. Exit")
+        choice = input("Choose an option (1-5): ")
+
+        if choice == '1':
+            add_task()
+        elif choice == '2':
+            view_tasks()
+        elif choice == '3':
+            complete_task()
+        elif choice == '4':
+            delete_task()
+        elif choice == '5':
+            print("Exiting......")
+            break
+        else:
+            print("Invalid choice. Please choose again.\n")
+
+main()
+
